@@ -145,6 +145,7 @@ Contributions are welcome! NetGuard is built to be a modular engine. If you want
 
 ---
 
-## 📜 License
+## ✍️ Author
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+**Prateek Khemka**
+- GitHub: [@Prateekk1407](https://github.com/Prateekk1407)
