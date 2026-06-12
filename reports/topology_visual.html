@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetGuard Topology</title>
+<style>
+:root{color-scheme:light;background:#f5f7fa;color:#17202c;font-family:Inter,Segoe UI,Arial,sans-serif}body{margin:0}header{padding:16px 24px;background:#17202c;color:white}h1{margin:0;font-size:22px;font-weight:700;letter-spacing:0}main{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:calc(100vh - 58px)}#canvas{background:#f8fafc;width:100%;height:calc(100vh - 58px)}aside{background:white;border-left:1px solid #d8dee7;padding:16px;overflow:auto}h2{font-size:14px;margin:18px 0 8px}.stat{display:grid;grid-template-columns:1fr auto;gap:8px;padding:8px 0;border-bottom:1px solid #edf0f4}.legend{display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:center;margin:7px 0}.swatch{width:14px;height:14px;border-radius:50%}.hint{font-size:12px;color:#697483;line-height:1.45}.nodeInfo{font-size:13px;line-height:1.5;padding:9px 0;border-bottom:1px solid #edf0f4}.zone{fill:#eef2f6;stroke:#d9e0ea;stroke-width:1}.zoneTitle{font-size:12px;font-weight:700;fill:#697483;text-anchor:middle}.link{stroke:#98a4b4;stroke-width:2;fill:none;opacity:.62}.link.wide{stroke-width:4}.link.down{stroke:#c64b42;stroke-dasharray:7 5}.link.dim{opacity:.12}.link.hot{stroke:#17202c;opacity:1;stroke-width:4}.node rect{rx:7;stroke:#182233;stroke-width:1.1}.node.dim{opacity:.25}.node text{pointer-events:none}.nodeName{font-size:13px;font-weight:800;fill:#17202c}.nodeMeta{font-size:11px;fill:#566273}.badgeText{font-size:11px;font-weight:800;fill:white;text-anchor:middle}.tooltip{position:fixed;display:none;background:#17202c;color:white;padding:8px 10px;border-radius:6px;font-size:12px;box-shadow:0 8px 24px #11182733;pointer-events:none;max-width:280px}@media(max-width:850px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #d8dee7}#canvas{height:72vh}}
+</style>
+</head>
+<body>
+<header><h1>NetGuard Topology Visual</h1></header>
+<main>
+<svg id="canvas" role="img" aria-label="Network topology visualization"></svg>
+<aside>
+<div class="stat"><span>Nodes</span><strong>46</strong></div>
+<div class="stat"><span>Links</span><strong>74</strong></div>
+<h2>Legend</h2>
+<div class="legend"><span class="swatch" style="background:#d94f45"></span><span>High risk</span></div>
+<div class="legend"><span class="swatch" style="background:#2d9d78"></span><span>Firewall protected</span></div>
+<div class="legend"><span class="swatch" style="background:#8a8f98"></span><span>Offline</span></div>
+<p class="hint">Nodes are arranged in automatic distance layers from the most connected node. Hover a node to highlight its direct links; hover a link for latency and bandwidth.</p>
+<h2>Nodes</h2>
+<div class="nodeInfo"><strong>CORE1</strong> router<br>risk 82.4, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>CORE2</strong> router<br>risk 93.0, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>EDGE1</strong> router<br>risk 45.9, sensitivity 3, firewall yes</div>
+<div class="nodeInfo"><strong>EDGE2</strong> router<br>risk 53.1, sensitivity 3, firewall yes</div>
+<div class="nodeInfo"><strong>DIST1</strong> router<br>risk 80.7, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>DIST2</strong> router<br>risk 60.3, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>DIST3</strong> router<br>risk 70.7, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>DIST4</strong> router<br>risk 70.8, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>FW_EDGE</strong> firewall<br>risk 100.0, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>FW_DB</strong> firewall<br>risk 77.8, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>FW_CLOUD</strong> firewall<br>risk 62.1, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>IDS1</strong> firewall<br>risk 52.8, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>WAF1</strong> firewall<br>risk 68.5, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>WEB1</strong> server<br>risk 42.5, sensitivity 3, firewall yes</div>
+<div class="nodeInfo"><strong>WEB2</strong> server<br>risk 43.4, sensitivity 3, firewall yes</div>
+<div class="nodeInfo"><strong>API1</strong> server<br>risk 77.6, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>API2</strong> server<br>risk 78.7, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>AUTH1</strong> server<br>risk 61.1, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>CACHE1</strong> server<br>risk 34.0, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>CACHE2</strong> server<br>risk 34.0, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>MAIL1</strong> server<br>risk 49.1, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>DNS1</strong> server<br>risk 48.0, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>DB_MAIN</strong> database<br>risk 72.5, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>DB_REPL</strong> database<br>risk 72.2, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>DB_AUDIT</strong> database<br>risk 75.8, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>FILE1</strong> server<br>risk 51.4, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>BACKUP1</strong> server<br>risk 60.1, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>VAULT1</strong> database<br>risk 74.2, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>CLOUD_GW</strong> router<br>risk 57.7, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>SAAS1</strong> server<br>risk 46.0, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>CLOUD_DB</strong> database<br>risk 72.0, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>VPN_HUB</strong> router<br>risk 59.7, sensitivity 4, firewall yes</div>
+<div class="nodeInfo"><strong>BRANCH1</strong> router<br>risk 34.0, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>BRANCH2</strong> router<br>risk 34.0, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>BRANCH3</strong> router<br>risk 34.0, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>ADMIN1</strong> admin<br>risk 73.6, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>ADMIN2</strong> admin<br>risk 72.0, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>SOC1</strong> admin<br>risk 74.2, sensitivity 5, firewall yes</div>
+<div class="nodeInfo"><strong>HR1</strong> endpoint<br>risk 34.6, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>FIN1</strong> endpoint<br>risk 58.7, sensitivity 4, firewall no</div>
+<div class="nodeInfo"><strong>DEV1</strong> endpoint<br>risk 49.4, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>DEV2</strong> endpoint<br>risk 49.3, sensitivity 3, firewall no</div>
+<div class="nodeInfo"><strong>SALES1</strong> endpoint<br>risk 22.0, sensitivity 1, firewall no</div>
+<div class="nodeInfo"><strong>SALES2</strong> endpoint<br>risk 22.3, sensitivity 1, firewall no</div>
+<div class="nodeInfo"><strong>IOT1</strong> endpoint<br>risk 34.0, sensitivity 2, firewall no</div>
+<div class="nodeInfo"><strong>IOT2</strong> endpoint<br>risk 34.0, sensitivity 2, firewall no</div>
+</aside>
+</main>
+<script>
+const nodes=[
+{id:"CORE1",type:"router",icon:"R",color:"#d94f45",risk:82.4,sensitivity:4,firewall:true,active:true},
+{id:"CORE2",type:"router",icon:"R",color:"#d94f45",risk:93.0,sensitivity:4,firewall:true,active:true},
+{id:"EDGE1",type:"router",icon:"R",color:"#2d9d78",risk:45.9,sensitivity:3,firewall:true,active:true},
+{id:"EDGE2",type:"router",icon:"R",color:"#2d9d78",risk:53.1,sensitivity:3,firewall:true,active:true},
+{id:"DIST1",type:"router",icon:"R",color:"#d94f45",risk:80.7,sensitivity:3,firewall:false,active:true},
+{id:"DIST2",type:"router",icon:"R",color:"#455a72",risk:60.3,sensitivity:3,firewall:false,active:true},
+{id:"DIST3",type:"router",icon:"R",color:"#d94f45",risk:70.7,sensitivity:3,firewall:false,active:true},
+{id:"DIST4",type:"router",icon:"R",color:"#d94f45",risk:70.8,sensitivity:3,firewall:false,active:true},
+{id:"FW_EDGE",type:"firewall",icon:"F",color:"#d94f45",risk:100.0,sensitivity:5,firewall:true,active:true},
+{id:"FW_DB",type:"firewall",icon:"F",color:"#d94f45",risk:77.8,sensitivity:5,firewall:true,active:true},
+{id:"FW_CLOUD",type:"firewall",icon:"F",color:"#2d9d78",risk:62.1,sensitivity:4,firewall:true,active:true},
+{id:"IDS1",type:"firewall",icon:"F",color:"#2d9d78",risk:52.8,sensitivity:4,firewall:true,active:true},
+{id:"WAF1",type:"firewall",icon:"F",color:"#2d9d78",risk:68.5,sensitivity:4,firewall:true,active:true},
+{id:"WEB1",type:"server",icon:"S",color:"#2d9d78",risk:42.5,sensitivity:3,firewall:true,active:true},
+{id:"WEB2",type:"server",icon:"S",color:"#2d9d78",risk:43.4,sensitivity:3,firewall:true,active:true},
+{id:"API1",type:"server",icon:"S",color:"#d94f45",risk:77.6,sensitivity:4,firewall:true,active:true},
+{id:"API2",type:"server",icon:"S",color:"#d94f45",risk:78.7,sensitivity:4,firewall:true,active:true},
+{id:"AUTH1",type:"server",icon:"S",color:"#2d9d78",risk:61.1,sensitivity:5,firewall:true,active:true},
+{id:"CACHE1",type:"server",icon:"S",color:"#2777c6",risk:34.0,sensitivity:2,firewall:false,active:true},
+{id:"CACHE2",type:"server",icon:"S",color:"#2777c6",risk:34.0,sensitivity:2,firewall:false,active:true},
+{id:"MAIL1",type:"server",icon:"S",color:"#2d9d78",risk:49.1,sensitivity:4,firewall:true,active:true},
+{id:"DNS1",type:"server",icon:"S",color:"#2d9d78",risk:48.0,sensitivity:4,firewall:true,active:true},
+{id:"DB_MAIN",type:"database",icon:"D",color:"#d94f45",risk:72.5,sensitivity:5,firewall:true,active:true},
+{id:"DB_REPL",type:"database",icon:"D",color:"#d94f45",risk:72.2,sensitivity:5,firewall:true,active:true},
+{id:"DB_AUDIT",type:"database",icon:"D",color:"#d94f45",risk:75.8,sensitivity:5,firewall:true,active:true},
+{id:"FILE1",type:"server",icon:"S",color:"#2d9d78",risk:51.4,sensitivity:4,firewall:true,active:true},
+{id:"BACKUP1",type:"server",icon:"S",color:"#2d9d78",risk:60.1,sensitivity:5,firewall:true,active:true},
+{id:"VAULT1",type:"database",icon:"D",color:"#d94f45",risk:74.2,sensitivity:5,firewall:true,active:true},
+{id:"CLOUD_GW",type:"router",icon:"R",color:"#2d9d78",risk:57.7,sensitivity:4,firewall:true,active:true},
+{id:"SAAS1",type:"server",icon:"S",color:"#2777c6",risk:46.0,sensitivity:3,firewall:false,active:true},
+{id:"CLOUD_DB",type:"database",icon:"D",color:"#d94f45",risk:72.0,sensitivity:5,firewall:true,active:true},
+{id:"VPN_HUB",type:"router",icon:"R",color:"#2d9d78",risk:59.7,sensitivity:4,firewall:true,active:true},
+{id:"BRANCH1",type:"router",icon:"R",color:"#455a72",risk:34.0,sensitivity:2,firewall:false,active:true},
+{id:"BRANCH2",type:"router",icon:"R",color:"#455a72",risk:34.0,sensitivity:2,firewall:false,active:true},
+{id:"BRANCH3",type:"router",icon:"R",color:"#455a72",risk:34.0,sensitivity:2,firewall:false,active:true},
+{id:"ADMIN1",type:"admin",icon:"A",color:"#d94f45",risk:73.6,sensitivity:5,firewall:true,active:true},
+{id:"ADMIN2",type:"admin",icon:"A",color:"#d94f45",risk:72.0,sensitivity:5,firewall:true,active:true},
+{id:"SOC1",type:"admin",icon:"A",color:"#d94f45",risk:74.2,sensitivity:5,firewall:true,active:true},
+{id:"HR1",type:"endpoint",icon:"E",color:"#69788a",risk:34.6,sensitivity:2,firewall:false,active:true},
+{id:"FIN1",type:"endpoint",icon:"E",color:"#69788a",risk:58.7,sensitivity:4,firewall:false,active:true},
+{id:"DEV1",type:"endpoint",icon:"E",color:"#69788a",risk:49.4,sensitivity:3,firewall:false,active:true},
+{id:"DEV2",type:"endpoint",icon:"E",color:"#69788a",risk:49.3,sensitivity:3,firewall:false,active:true},
+{id:"SALES1",type:"endpoint",icon:"E",color:"#69788a",risk:22.0,sensitivity:1,firewall:false,active:true},
+{id:"SALES2",type:"endpoint",icon:"E",color:"#69788a",risk:22.3,sensitivity:1,firewall:false,active:true},
+{id:"IOT1",type:"endpoint",icon:"E",color:"#69788a",risk:34.0,sensitivity:2,firewall:false,active:true},
+{id:"IOT2",type:"endpoint",icon:"E",color:"#69788a",risk:34.0,sensitivity:2,firewall:false,active:true}
+];
+const links=[
+{source:"CORE1",target:"VPN_HUB",latency:2,bandwidth:160,active:true},
+{source:"CORE1",target:"DIST2",latency:3,bandwidth:220,active:true},
+{source:"CORE1",target:"DIST1",latency:2,bandwidth:220,active:true},
+{source:"CORE1",target:"EDGE1",latency:2,bandwidth:300,active:true},
+{source:"CORE1",target:"CORE2",latency:1,bandwidth:400,active:true},
+{source:"CORE2",target:"FW_CLOUD",latency:2,bandwidth:180,active:true},
+{source:"CORE2",target:"DIST4",latency:3,bandwidth:220,active:true},
+{source:"CORE2",target:"DIST3",latency:2,bandwidth:220,active:true},
+{source:"CORE2",target:"EDGE2",latency:2,bandwidth:300,active:true},
+{source:"EDGE1",target:"FW_EDGE",latency:1,bandwidth:250,active:true},
+{source:"EDGE1",target:"EDGE2",latency:3,bandwidth:180,active:true},
+{source:"EDGE2",target:"FW_EDGE",latency:1,bandwidth:250,active:true},
+{source:"DIST1",target:"HR1",latency:2,bandwidth:90,active:true},
+{source:"DIST1",target:"SOC1",latency:2,bandwidth:100,active:true},
+{source:"DIST1",target:"ADMIN1",latency:2,bandwidth:100,active:true},
+{source:"DIST1",target:"DIST2",latency:4,bandwidth:120,active:true},
+{source:"DIST2",target:"FIN1",latency:2,bandwidth:90,active:true},
+{source:"DIST2",target:"ADMIN2",latency:3,bandwidth:100,active:true},
+{source:"DIST2",target:"FW_DB",latency:2,bandwidth:200,active:true},
+{source:"DIST2",target:"DIST3",latency:5,bandwidth:100,active:true},
+{source:"DIST3",target:"DEV2",latency:2,bandwidth:90,active:true},
+{source:"DIST3",target:"DEV1",latency:2,bandwidth:90,active:true},
+{source:"DIST3",target:"FW_DB",latency:2,bandwidth:200,active:true},
+{source:"DIST3",target:"DIST4",latency:4,bandwidth:120,active:true},
+{source:"DIST4",target:"IOT2",latency:3,bandwidth:30,active:true},
+{source:"DIST4",target:"IOT1",latency:3,bandwidth:30,active:true},
+{source:"DIST4",target:"SALES2",latency:2,bandwidth:80,active:true},
+{source:"DIST4",target:"SALES1",latency:2,bandwidth:80,active:true},
+{source:"DIST4",target:"FILE1",latency:3,bandwidth:110,active:true},
+{source:"FW_EDGE",target:"IDS1",latency:1,bandwidth:100,active:true},
+{source:"FW_EDGE",target:"MAIL1",latency:2,bandwidth:90,active:true},
+{source:"FW_EDGE",target:"DNS1",latency:1,bandwidth:80,active:true},
+{source:"FW_EDGE",target:"WAF1",latency:1,bandwidth:220,active:true},
+{source:"FW_DB",target:"DB_AUDIT",latency:4,bandwidth:120,active:true},
+{source:"FW_DB",target:"DB_REPL",latency:3,bandwidth:150,active:true},
+{source:"FW_DB",target:"DB_MAIN",latency:2,bandwidth:180,active:true},
+{source:"FW_CLOUD",target:"CLOUD_GW",latency:2,bandwidth:160,active:true},
+{source:"IDS1",target:"IOT2",latency:8,bandwidth:25,active:true},
+{source:"IDS1",target:"IOT1",latency:8,bandwidth:25,active:true},
+{source:"IDS1",target:"SOC1",latency:2,bandwidth:90,active:true},
+{source:"WAF1",target:"WEB2",latency:2,bandwidth:180,active:true},
+{source:"WAF1",target:"WEB1",latency:2,bandwidth:180,active:true},
+{source:"WEB1",target:"BRANCH1",latency:22,bandwidth:45,active:true},
+{source:"WEB1",target:"API1",latency:3,bandwidth:140,active:true},
+{source:"WEB2",target:"API2",latency:3,bandwidth:140,active:true},
+{source:"API1",target:"DEV1",latency:6,bandwidth:60,active:true},
+{source:"API1",target:"CACHE1",latency:1,bandwidth:160,active:true},
+{source:"API1",target:"AUTH1",latency:2,bandwidth:120,active:true},
+{source:"API1",target:"API2",latency:2,bandwidth:100,active:true},
+{source:"API2",target:"DEV2",latency:6,bandwidth:60,active:true},
+{source:"API2",target:"CACHE2",latency:1,bandwidth:160,active:true},
+{source:"API2",target:"AUTH1",latency:2,bandwidth:120,active:true},
+{source:"AUTH1",target:"VAULT1",latency:4,bandwidth:80,active:true},
+{source:"MAIL1",target:"HR1",latency:5,bandwidth:50,active:true},
+{source:"DB_MAIN",target:"DB_AUDIT",latency:5,bandwidth:90,active:true},
+{source:"DB_MAIN",target:"DB_REPL",latency:2,bandwidth:160,active:true},
+{source:"DB_AUDIT",target:"VAULT1",latency:4,bandwidth:70,active:true},
+{source:"FILE1",target:"BACKUP1",latency:8,bandwidth:80,active:true},
+{source:"BACKUP1",target:"VAULT1",latency:6,bandwidth:70,active:true},
+{source:"CLOUD_GW",target:"CLOUD_DB",latency:24,bandwidth:70,active:true},
+{source:"CLOUD_GW",target:"SAAS1",latency:18,bandwidth:80,active:true},
+{source:"SAAS1",target:"BRANCH2",latency:32,bandwidth:25,active:true},
+{source:"CLOUD_DB",target:"DB_REPL",latency:28,bandwidth:60,active:true},
+{source:"VPN_HUB",target:"BRANCH3",latency:30,bandwidth:50,active:true},
+{source:"VPN_HUB",target:"BRANCH2",latency:24,bandwidth:60,active:true},
+{source:"VPN_HUB",target:"BRANCH1",latency:18,bandwidth:70,active:true},
+{source:"BRANCH1",target:"HR1",latency:20,bandwidth:35,active:true},
+{source:"BRANCH1",target:"BRANCH2",latency:35,bandwidth:30,active:true},
+{source:"BRANCH2",target:"FIN1",latency:26,bandwidth:35,active:true},
+{source:"BRANCH3",target:"SALES2",latency:34,bandwidth:25,active:true},
+{source:"BRANCH3",target:"SALES1",latency:34,bandwidth:25,active:true},
+{source:"ADMIN1",target:"VAULT1",latency:5,bandwidth:60,active:true},
+{source:"ADMIN2",target:"DB_MAIN",latency:4,bandwidth:70,active:true},
+{source:"FIN1",target:"DB_AUDIT",latency:9,bandwidth:40,active:true}
+];
+const svg=document.getElementById('canvas');const ns='http://www.w3.org/2000/svg';const tooltip=document.createElement('div');tooltip.className='tooltip';document.body.appendChild(tooltip);const byId=new Map(nodes.map(n=>[n.id,n]));links.forEach(l=>{l.source=byId.get(l.source);l.target=byId.get(l.target)});const degree=new Map(nodes.map(n=>[n.id,0]));links.forEach(l=>{degree.set(l.source.id,degree.get(l.source.id)+1);degree.set(l.target.id,degree.get(l.target.id)+1)});const root=nodes.slice().sort((a,b)=>degree.get(b.id)-degree.get(a.id)||b.risk-a.risk||a.id.localeCompare(b.id))[0];const adj=new Map(nodes.map(n=>[n.id,[]]));links.forEach(l=>{adj.get(l.source.id).push(l.target);adj.get(l.target.id).push(l.source)});const q=[root];root.level=0;for(let p=0;p<q.length;p++){for(const next of adj.get(q[p].id)){if(next.level===undefined){next.level=q[p].level+1;q.push(next)}}}nodes.forEach(n=>{if(n.level===undefined)n.level=(root?root.level:0)+1});const layers=[];nodes.forEach(n=>{(layers[n.level]||(layers[n.level]=[])).push(n)});layers.forEach(a=>a.sort((x,y)=>x.type.localeCompare(y.type)||y.risk-x.risk||x.id.localeCompare(y.id)));function el(n,c){const x=document.createElementNS(ns,n);if(c)x.setAttribute('class',c);return x}function clear(){while(svg.firstChild)svg.removeChild(svg.firstChild)}function setAttrs(e,o){for(const k in o)e.setAttribute(k,o[k]);return e}function render(){clear();const w=Math.max(svg.clientWidth,720),h=Math.max(svg.clientHeight,520);svg.setAttribute('viewBox',`0 0 ${w} ${h}`);const marginX=70,cardW=118,cardH=58,gapX=Math.max(170,(w-marginX*2)/Math.max(layers.length-1,1));layers.forEach((layer,li)=>{const x=marginX+li*gapX;const zone=setAttrs(el('rect','zone'),{x:x-cardW/2-18,y:24,width:cardW+36,height:h-58,rx:8});svg.append(zone);const title=setAttrs(el('text','zoneTitle'),{x:x,y:46});title.textContent=li===0?'Core':`Layer ${li}`;svg.append(title);const usable=h-125;const step=usable/Math.max(layer.length,1);layer.forEach((n,i)=>{n.x=x;n.y=84+step*(i+.5)})});const linkG=el('g'),nodeG=el('g');svg.append(linkG,nodeG);const linkEls=links.map(l=>{const line=setAttrs(el('path','link '+(l.bandwidth>=100?'wide ':'')+(l.active?'':'down ')),{d:`M${l.source.x},${l.source.y} C${(l.source.x+l.target.x)/2},${l.source.y} ${(l.source.x+l.target.x)/2},${l.target.y} ${l.target.x},${l.target.y}`});line.addEventListener('mousemove',ev=>showTip(ev,`${l.source.id} to ${l.target.id}<br>${l.latency} ms latency<br>${l.bandwidth} Mbps bandwidth`));line.addEventListener('mouseleave',hideTip);linkG.append(line);return{l,line}});const nodeEls=nodes.map(n=>{const g=el('g','node');g.dataset.id=n.id;g.setAttribute('transform',`translate(${n.x-cardW/2},${n.y-cardH/2})`);const r=setAttrs(el('rect'),{width:cardW,height:cardH,fill:'#ffffff'});r.setAttribute('stroke',n.color);r.setAttribute('stroke-width',n.risk>=70?3:1.4);const badge=setAttrs(el('rect'),{x:8,y:8,width:24,height:24,rx:5,fill:n.color});const bt=setAttrs(el('text','badgeText'),{x:20,y:25});bt.textContent=n.icon;const name=setAttrs(el('text','nodeName'),{x:40,y:21});name.textContent=n.id;const meta=setAttrs(el('text','nodeMeta'),{x:40,y:39});meta.textContent=`${n.type} | risk ${Math.round(n.risk)}`;const flags=setAttrs(el('text','nodeMeta'),{x:10,y:52});flags.textContent=(n.firewall?'firewall':'no firewall')+(n.active?'':' | offline');g.append(r,badge,bt,name,meta,flags);g.addEventListener('mousemove',ev=>showTip(ev,`${n.id}<br>${n.type}<br>risk ${n.risk.toFixed(1)} / 100<br>sensitivity ${n.sensitivity}<br>${degree.get(n.id)} direct links`));g.addEventListener('mouseenter',()=>focusNode(n));g.addEventListener('mouseleave',()=>{clearFocus();hideTip()});nodeG.append(g);return{n,g}});function focusNode(n){const near=new Set([n.id]);links.forEach(l=>{if(l.source===n)near.add(l.target.id);if(l.target===n)near.add(l.source.id)});nodeEls.forEach(o=>o.g.classList.toggle('dim',!near.has(o.n.id)));linkEls.forEach(o=>{const hot=o.l.source===n||o.l.target===n;o.line.classList.toggle('hot',hot);o.line.classList.toggle('dim',!hot)})}function clearFocus(){nodeEls.forEach(o=>o.g.classList.remove('dim'));linkEls.forEach(o=>{o.line.classList.remove('hot');o.line.classList.remove('dim')})}function showTip(ev,html){tooltip.innerHTML=html;tooltip.style.display='block';tooltip.style.left=(ev.clientX+14)+'px';tooltip.style.top=(ev.clientY+14)+'px'}function hideTip(){tooltip.style.display='none'}}render();window.addEventListener('resize',render);
+</script>
+</body>
+</html>

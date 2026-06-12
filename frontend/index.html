@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NetGuard Analysis Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="#dashboard" aria-label="NetGuard dashboard">
+      <span class="brand-mark">N</span>
+      <span>
+        <strong>NetGuard</strong>
+        <small>Analysis Deck</small>
+      </span>
+    </a>
+    <button class="icon-button menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+      <a href="#topology">Topology</a>
+      <a href="#routing">Routing</a>
+      <a href="#security">Security</a>
+      <a href="#flow">Flow</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#faults">Faults</a>
+      <a href="#report">Report</a>
+    </nav>
+  </header>
+
+  <main id="dashboard">
+    <section class="hero section">
+      <div class="hero-copy">
+        <p class="eyebrow">Design and Analysis of Algorithms Project</p>
+        <h1>Explainable network defense in one interactive deck.</h1>
+        <p class="hero-text">Upload a NetGuard topology or use a preset. The dashboard translates every C-module feature into concise visual decisions: routing, risk, flow, attack paths, packet scheduling, DDoS spread, faults, and report export.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#topology">Upload or analyze</a>
+          <a class="button secondary" href="#simulation">Run simulations</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="depth-orbit orbit-one"><span></span></div>
+        <div class="depth-orbit orbit-two"><span></span></div>
+        <div class="orbital-core"><span></span></div>
+        <div class="depth-panel">
+          <div class="signal-row"><span class="dot route"></span><strong>Fastest route</strong><em id="heroRoute">--</em></div>
+          <div class="signal-row"><span class="dot flow"></span><strong>Max throughput</strong><em id="heroFlow">--</em></div>
+          <div class="signal-row"><span class="dot risk"></span><strong>Peak risk</strong><em id="heroRisk">--</em></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section metrics-grid" aria-label="Network summary">
+      <article class="metric-card"><span>Nodes</span><strong id="metricNodes">0</strong><small>loaded assets</small></article>
+      <article class="metric-card"><span>Links</span><strong id="metricLinks">0</strong><small>active topology</small></article>
+      <article class="metric-card"><span>Resilience</span><strong id="metricResilience">0</strong><small>out of 100</small></article>
+      <article class="metric-card"><span>Critical</span><strong id="metricCritical">0</strong><small>high risk nodes</small></article>
+    </section>
+
+    <section class="section app-shell" id="topology">
+      <aside class="control-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Input</p>
+          <h2>Topology source</h2>
+        </div>
+        <div class="segmented" role="group" aria-label="Sample topology presets">
+          <button class="segment active" data-preset="sample">Sample</button>
+          <button class="segment" data-preset="enterprise">Enterprise</button>
+        </div>
+        <label class="file-drop">
+          <input type="file" id="topologyFile" accept=".txt">
+          <span>Upload topology file</span>
+          <small id="fileStatus">No file selected</small>
+        </label>
+        <label class="field-label" for="topologyInput">Topology text</label>
+        <textarea id="topologyInput" spellcheck="false"></textarea>
+        <button class="button primary full" id="analyzeBtn">Run full analysis</button>
+        <p class="hint">Same format as the C project: `NODE id name type sensitivity firewall` and `EDGE from to latency bandwidth U/D`.</p>
+      </aside>
+
+      <section class="visual-card">
+        <div class="visual-toolbar">
+          <div>
+            <p class="eyebrow">Topology</p>
+            <h2 id="visualTitle">Network Map</h2>
+          </div>
+          <div class="legend">
+            <span><i class="risk"></i>High risk</span>
+            <span><i class="firewall"></i>Firewall</span>
+            <span><i class="normal"></i>Standard</span>
+          </div>
+        </div>
+        <div class="insight-strip" id="topologyInsight">
+          <span>Hover a node to isolate its neighborhood.</span>
+          <span>Red means risk, green means firewall coverage.</span>
+          <span>Dashed links are directed.</span>
+        </div>
+        <svg id="networkSvg" role="img" aria-label="Network topology graph"></svg>
+        <div class="tooltip" id="tooltip" role="status"></div>
+      </section>
+    </section>
+
+    <section class="section two-column" id="routing">
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Routing</p>
+          <h2>Algorithm comparison</h2>
+        </div>
+        <div class="form-grid">
+          <label>Source<select id="routeSource"></select></label>
+          <label>Destination<select id="routeDestination"></select></label>
+        </div>
+        <button class="button secondary full" id="routeBtn">Compare routes</button>
+        <div class="result-stack" id="routingResults"></div>
+      </article>
+
+      <article class="soft-card" id="flow">
+        <div class="section-heading compact">
+          <p class="eyebrow">Flow</p>
+          <h2>Max-flow / min-cut</h2>
+        </div>
+        <div class="form-grid">
+          <label>Source<select id="flowSource"></select></label>
+          <label>Sink<select id="flowDestination"></select></label>
+        </div>
+        <button class="button secondary full" id="flowBtn">Compute flow</button>
+        <div class="result-stack" id="flowResults"></div>
+      </article>
+    </section>
+
+    <section class="section two-column" id="security">
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Security</p>
+          <h2>Critical infrastructure</h2>
+        </div>
+        <div class="result-stack" id="securityResults"></div>
+      </article>
+
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Risk</p>
+          <h2>Traffic heatmap</h2>
+        </div>
+        <div class="risk-list" id="riskList"></div>
+      </article>
+    </section>
+
+    <section class="section two-column" id="simulation">
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Attack</p>
+          <h2>Attack path simulation</h2>
+        </div>
+        <label>Entry node<select id="attackSource"></select></label>
+        <button class="button secondary full" id="attackBtn">Trace sensitive paths</button>
+        <div class="result-stack scroll-box" id="attackResults"></div>
+      </article>
+
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Scheduler</p>
+          <h2>Packet gate and DDoS cascade</h2>
+        </div>
+        <label>DDoS start node<select id="ddosSource"></select></label>
+        <button class="button secondary full" id="simulateBtn">Run simulations</button>
+        <div class="result-stack scroll-box" id="simulationResults"></div>
+      </article>
+    </section>
+
+    <section class="section two-column" id="faults">
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Fault Injection</p>
+          <h2>Topology controls</h2>
+        </div>
+        <div class="form-grid">
+          <label>Node<select id="faultNode"></select></label>
+          <label>Link<select id="faultLink"></select></label>
+        </div>
+        <div class="fault-actions">
+          <button class="button secondary" id="takeNodeBtn">Take node down</button>
+          <button class="button secondary" id="restoreNodeBtn">Restore node</button>
+          <button class="button secondary" id="takeLinkBtn">Take link down</button>
+          <button class="button secondary" id="restoreLinkBtn">Restore link</button>
+          <button class="button primary" id="addFirewallBtn">Add firewall</button>
+        </div>
+      </article>
+
+      <article class="soft-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">State</p>
+          <h2>Live topology changes</h2>
+        </div>
+        <div class="result-stack scroll-box" id="faultResults"></div>
+      </article>
+    </section>
+
+    <section class="section report-card" id="report">
+      <div class="section-heading">
+        <p class="eyebrow">Report</p>
+        <h2>Vulnerability report</h2>
+      </div>
+      <div class="report-actions">
+        <button class="button primary" id="downloadReportBtn">Download report</button>
+        <button class="button secondary" id="copyReportBtn">Copy text</button>
+      </div>
+      <pre id="reportOutput"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
