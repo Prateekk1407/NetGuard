@@ -135,6 +135,21 @@ Using the Edmonds-Karp algorithm, NetGuard calculates the maximum throughput bet
 
 ---
 
+## 🏗️ Architecture & Data Structures
+
+NetGuard leverages lightweight, highly optimized data structures:
+* **Dynamic Adjacency List:** Nodes and edges track real-time network states including `latency`, `bandwidth`, `firewall` status, and computed `risk_score`.
+* **Topology Visualizer:** Generates an interactive HTML representation of your network graph (`reports/topology_visual.html`) alongside the terminal UI.
+
+## 📊 Security Metrics Explained
+
+The engine evaluates network vulnerability through several lenses:
+* **Articulation Impact:** Uses Tarjan's algorithm to calculate not just if a node is a SPoF, but measures its "impact score" (how much of the network gets partitioned if it goes down).
+* **Bridge Criticality:** Evaluates the severity of a single severed link.
+* **Betweenness Centrality:** Determines traffic bottlenecks. Nodes with high intermediation frequency become prime targets for attackers.
+
+---
+
 ## ✍️ Author
 
 **Prateek Khemka**
