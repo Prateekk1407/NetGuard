@@ -109,3 +109,42 @@ Network Resilience Score: 61/100 [MODERATE RISK]
 ```
 
 Full vulnerability reports are automatically saved to `vulnerability_report.txt` in the root directory.
+
+---
+
+## 🛡️ Advanced Capabilities
+
+### 1. Interactive Fault Injection
+NetGuard allows administrators to interactively simulate network outages. You can severe links or completely take down nodes in real-time. The engine immediately recalculates the routing paths and adjusts the network resilience score to reflect the new topology state.
+
+### 2. DDoS Cascade & Attack Path Simulation
+Beyond standard routing, the engine can trace potential attack paths from a compromised entry node. Using Breadth-First Search (BFS), it simulates how a DDoS attack might cascade through the network, identifying which routers and endpoints would be overwhelmed first.
+
+### 3. Max-Flow & Min-Cut Analysis
+Using the Edmonds-Karp algorithm, NetGuard calculates the maximum throughput between any source and destination. Furthermore, it identifies the "Min-Cut" — the exact edges that, if severed, would disconnect the network. This intelligence is crucial for optimal firewall placement to prevent lateral movement by attackers.
+
+---
+
+## 📈 Roadmap & Future Enhancements
+
+- [ ] **IPv6 Support:** Upgrade the underlying structures to handle extended IPv6 address spaces and routing headers.
+- [ ] **Distributed Consensus:** Implement raft-like consensus for decentralized route agreement in multi-controller environments.
+- [ ] **BGP Simulation:** Add BGP route propagation mechanics for inter-domain routing analysis.
+- [ ] **GUI Dashboard:** Transition the rich terminal ASCII output to a comprehensive web-based dashboard using WebSockets.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! NetGuard is built to be a modular engine. If you want to add a new graph algorithm or improve the existing routing logic:
+1. Fork the repository
+2. Create a new feature branch (`git checkout -b feature/advanced-routing`)
+3. Commit your changes (`git commit -m 'Add advanced routing heuristic'`)
+4. Push to the branch (`git push origin feature/advanced-routing`)
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
