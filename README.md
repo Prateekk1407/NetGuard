@@ -132,16 +132,6 @@ Using the Edmonds-Karp algorithm, NetGuard calculates the maximum throughput bet
 - [ ] **BGP Simulation:** Add BGP route propagation mechanics for inter-domain routing analysis.
 - [ ] **GUI Dashboard:** Transition the rich terminal ASCII output to a comprehensive web-based dashboard using WebSockets.
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! NetGuard is built to be a modular engine. If you want to add a new graph algorithm or improve the existing routing logic:
-1. Fork the repository
-2. Create a new feature branch (`git checkout -b feature/advanced-routing`)
-3. Commit your changes (`git commit -m 'Add advanced routing heuristic'`)
-4. Push to the branch (`git push origin feature/advanced-routing`)
-5. Open a Pull Request
 
 ---
 
