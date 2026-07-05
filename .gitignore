@@ -1,0 +1,14 @@
+# Build artifacts
+build/
+*.o
+*.exe
+
+# Local API config (keep secrets out of git)
+frontend/netsentinel.config.js
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports (auto-generated)
+reports/vulnerability_report.txt

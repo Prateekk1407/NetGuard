@@ -208,6 +208,7 @@ const els = {
 };
 
 let state = { graph: null, security: null, report: "" };
+window.state = state;   // exposed for NetSentinel AI
 const INF = 1e9;
 
 function nodeIcon(type) {
@@ -945,6 +946,7 @@ function runFullAnalysis() {
     const graph = parseTopology(els.topologyInput.value);
     const security = analyzeSecurity(graph);
     state = { graph, security, report: "" };
+    window.state = state;   // keep NetSentinel reference in sync
     els.faultResults.innerHTML = "";
     renderSelects(graph);
     renderGraph(graph);
@@ -1006,5 +1008,6 @@ els.menuToggle.addEventListener("click", () => {
 });
 els.navLinks.addEventListener("click", () => els.navLinks.classList.remove("open"));
 
+window.runFullAnalysis = runFullAnalysis;  // exposed for NetSentinel AI
 els.topologyInput.value = SAMPLE_TOPOLOGY;
 runFullAnalysis();
